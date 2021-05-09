@@ -1,0 +1,48 @@
+.cawContainer {
+
+    margin: 10px;
+
+    .titleLine {
+        display: flex;
+
+        .titleLogo {
+            width: 55px;
+            height: 55px;
+        }
+
+        .titleName{
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+    }
+
+    .cawContent{
+        margin-top: 20px;
+    }
+
+    .cawActions{
+        position: relative;
+        margin-top: 10px;
+        top: 10px;
+        bottom: 0px;
+
+        button{
+            border: 1.5px solid var(--grey);
+            background-color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            scale: 1.2;
+        }
+
+        .icon {
+            scale: 1.5;
+            color: #ffdd57;
+        }
+
+    }
+}

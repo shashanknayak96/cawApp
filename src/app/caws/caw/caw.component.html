@@ -1,0 +1,24 @@
+<div class="cawContainer">
+    <div class="box">
+
+        <div class="titleLine">
+            <img class="titleLogo" src="./assets/cawLogo.png" alt="title">
+            <div class="titleName">
+                <h5 class="title is-5">Shashank Nayak
+                    <h6 class="subtitle is-6">@shash</h6>
+                </h5>
+            </div>
+        </div>
+        <div class="cawContent">
+            <h6 class="subtitle is-5">I think I should caw caw caw caw caw.</h6>
+        </div>
+
+        <div class="cawActions">
+            <button (click)="likeMessage()">
+                <span class="icon">
+                    <fa-icon [icon]="this.messageLiked ? solidHeart : emptyHeart"></fa-icon>
+                </span>
+            </button>
+        </div>
+    </div>
+</div>

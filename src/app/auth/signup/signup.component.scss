@@ -1,0 +1,39 @@
+$background: #FFDF6C;
+$mainColor: #333333;
+
+.mainContainer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $background;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: $mainColor;
+
+    .box {
+        position: relative;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        width: 500px;
+    }
+
+    input.password {
+        letter-spacing: 3px;
+    }
+
+    .imgLogo {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -30%;
+    }
+
+    a {
+        color: $mainColor;
+    }
+}

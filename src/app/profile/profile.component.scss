@@ -1,0 +1,94 @@
+.profileEditContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    .previewComponent {
+        width: 40vw;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 20px;
+        top: 45px;
+
+        .editDropdown {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+
+            .icon {
+                scale: 1.5;
+            }
+        }
+
+        .userImage {
+            width: 250px;
+            height: 250px;
+        }
+
+        .userInformation {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 25px;
+        }
+
+        .stats {
+            margin-top: 20px;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+
+            .statBox {
+                margin-right: 20px;
+                margin-left: 20px;
+            }
+        }
+
+        .actionButtons{
+
+            margin-top: 20px;
+
+            button{
+                width: 150px;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    .profileEditContainer {
+        .previewComponent {
+            width: 90vw;
+
+            .userImage {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 420px) {
+    .profileEditContainer {
+        .previewComponent {
+            .stats {
+                flex-direction: column;
+            }
+
+            .actionButtons{
+                button{
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}

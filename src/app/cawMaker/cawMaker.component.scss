@@ -1,0 +1,33 @@
+.cawmakerContainer {
+    position: sticky;
+    top: 10px;
+    margin-top: 20px;
+
+    .box {
+        position: relative;
+        height: 170px;
+
+        textarea {
+            resize: none;
+        }
+
+        .cawActions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .rightActions{
+                display: flex;
+                align-items: center;
+                margin-top: 10px;
+
+                .charCount{
+                    margin-right: 10px;
+                }
+
+            }
+
+
+            
+        }
+    }
+}
