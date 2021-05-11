@@ -1,0 +1,20 @@
+<div class="userFinderContainer">
+    <div class="box">
+        <form>
+            <input class="input" 
+                placeholder="Find other cawer's here..."
+                />
+            <div class="cawActions">
+                <span></span>
+                <div class="rightActions">
+                    <button type="button" 
+                        class="button is-rounded is-warning" 
+                        >FIND</button>
+                </div>
+            </div>
+        </form>
+        <div>
+            <UserFinderItem *ngFor="let a of user" [user]="a"></UserFinderItem>
+        </div>
+    </div>
+</div>

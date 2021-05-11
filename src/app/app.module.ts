@@ -15,6 +15,8 @@ import { ProfileCardComponent } from './profilecard/profilecard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { UserFinder } from './userFinder/userFinder.component';
+import { UserFinderItem } from './userFinder/userFinderItem/userFinderItem.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
     CawMaker,
     CawsComponent,
     CawComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserFinder,
+    UserFinderItem
   ],
   imports: [
     BrowserModule,

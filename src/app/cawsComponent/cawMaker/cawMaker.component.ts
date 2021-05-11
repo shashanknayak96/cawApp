@@ -31,6 +31,7 @@ export class CawMaker implements OnInit{
     addCaw(){
         const cawMessage = this.cawFormGroup.value['cawMessage'];
         this.cawService.addCaw(cawMessage);
+        this.cawFormGroup.reset();
     }
 
     public isEmojiPickerVisible: boolean;

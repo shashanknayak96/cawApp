@@ -11,10 +11,17 @@ exports.addCaw = (req, res, next) => {
     })
 
     message.save()
-        .then(cawMessage => {
+        .then(cawMessageResponse => {
+            User.findByIdAndUpdate(userId, { $push: { messages: cawMessageResponse._id } })
+                .then(r => {
+
+                })
+            return cawMessageResponse
+        })
+        .then(cawMessageResponse => {
             res.status(201).json({
                 message: "caw_added_successfully",
-                res: cawMessage._id
+                res: cawMessageResponse._id
             })
         })
         .catch(error => {
@@ -46,11 +53,10 @@ exports.getCaws = (req, res, next) => {
 }
 
 exports.getCawById = (req, res, next) => {
-    const {messageId} = req.query;
-    console.log(messageId);
+    const { messageId } = req.query;
     CawMessage.findById(messageId)
         .populate('userId')
-        .then(message  => {
+        .then(message => {
             res.status(201).json({
                 message: 'sent_message_by_id',
                 message: message
@@ -65,19 +71,23 @@ exports.getCawById = (req, res, next) => {
 
 exports.likeCaw = (req, res, next) => {
     const { userId, messageId } = req.body;
+    console.log("USERID: ", userId, " MESSAGEID: ", messageId);
 
     CawMessage.findByIdAndUpdate(messageId, { $inc: { totalLikes: 1 } })
-        .then( (r) => {
-            if(r){
-                return User.findOneAndUpdate({userId}, {$push: {likesMessages: messageId}})         
-            }}
-        )
         .then((r) => {
-            res.status(201).json({
-                message: 'caw_liked',
-                liked_message: messageId,
-                userId: userId
-            })
+            console.log("LIKED: ", r);
+            
+            if (r) {
+                User.findByIdAndUpdate(userId, { $push: { likesMessages: messageId } })
+                    .then((r) => {
+                        console.log("AFTER", r);
+                        res.status(201).json({
+                            message: 'caw_liked',
+                            liked_message: messageId,
+                            userId: userId
+                        })
+                    })
+            }
         })
         .catch(error => {
             res.status(500).json({
@@ -91,10 +101,11 @@ exports.unlikeCaw = (req, res, next) => {
     const { userId, messageId } = req.body;
 
     CawMessage.findByIdAndUpdate(messageId, { $inc: { totalLikes: -1 } })
-        .then( (r) => {
-            if(r){
-                return User.findOneAndUpdate({userId}, {$pull: {likesMessages: messageId}})         
-            }}
+        .then((r) => {
+            if (r) {
+                return User.findByIdAndUpdate(userId, { $pull: { likesMessages: messageId } })
+            }
+        }
         )
         .then((r) => {
             res.status(201).json({

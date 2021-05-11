@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 
 app.use('/user', userRoutes);
 app.use('/caw', cawRoutes);
-
+mongoose.set('useFindAndModify', false);
 mongoose.connect("mongodb+srv://shashank:CawCaw@cawapp.tld43.mongodb.net/cawAppDB?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true

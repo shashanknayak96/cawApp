@@ -10,9 +10,11 @@ import { Router } from "@angular/router";
 export class AuthService {
 
     api_key = 'AIzaSyBqnwWTBmQ1CJTqdqFPU0Ww92cGnwmzWws';
+    backend_url = 'http://localhost:3000'
     signedUp: boolean = false;
     userToken: string;
     userId: string;
+
 
     constructor(private http: HttpClient, private router: Router) { }
 
@@ -25,11 +27,14 @@ export class AuthService {
     }
     
     public get getUserId() : string {
+        if(localStorage.getItem('user_id')){
+            this.userId = localStorage.getItem('user_id');
+        }
         return this.userId;
     }
 
     signup(user: UserModel) {
-        this.http.post('http://localhost:3000/user/signup',
+        this.http.post(this.backend_url + '/user/signup',
             {
                 userTag: user.userTag,
                 firstName: user.firstName,
@@ -61,6 +66,10 @@ export class AuthService {
                 localStorage.setItem('user_id', r.id);
                 this.router.navigate(['/home']);
             })
+    }
+
+    getUserById(userId: string){
+        return this.http.get<any>(this.backend_url + '/user/getUserById' + '?userId=' + userId);
     }
 
     logout(){

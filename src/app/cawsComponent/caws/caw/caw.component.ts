@@ -6,6 +6,7 @@ import { CawService } from "../../caw.service";
 
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthService } from "src/app/auth/auth.service";
 
 
 @Component({
@@ -23,17 +24,18 @@ export class CawComponent implements OnInit {
         totalLikes: number,
         userId: UserModel
     };
-
     solidHeart = solidHeart;
     emptyHeart = emptyHeart;
-
     messageLiked: boolean = false;
+    userId:string; 
 
-    constructor(private cawService: CawService) {
+
+    constructor(private auth: AuthService,private cawService: CawService) {
 
     }
 
     ngOnInit() {
+        this.userId = this.auth.getUserId;
         const userLikeMessages: string[] = this.message.userId.likesMessages;
         if(userLikeMessages.includes(this.message.messageId)){
             this.messageLiked = true;
@@ -44,13 +46,11 @@ export class CawComponent implements OnInit {
 
     likeMessage() {
         this.messageLiked = !this.messageLiked;
-
-        //Change user here  = this.message.userId.userId
+        
         if(this.messageLiked){
             this.message.totalLikes += 1;            
-            this.cawService.likeCaw(this.message.userId.userId, this.message.messageId)
+            this.cawService.likeCaw(this.userId, this.message.messageId)
                 .subscribe(r => {
-                    console.log("likeCaw", r)
                     this.cawService.getCawById(this.message.messageId)
                     .pipe(
                         map(messageObject => {
@@ -61,7 +61,6 @@ export class CawComponent implements OnInit {
                         })
                     )
                     .subscribe(message => {
-                        console.log("getCawID", message)
                         this.message = message;
                     })
                 }, e => {
@@ -69,17 +68,18 @@ export class CawComponent implements OnInit {
                 })
         }else {
             this.message.totalLikes -= 1;   
-            this.cawService.unlikeCaw(this.message.userId.userId, this.message.messageId)
+            this.cawService.unlikeCaw(this.userId, this.message.messageId)
             .subscribe(r => {
-                console.log("unlikeCaw", r)
                 this.cawService.getCawById(this.message.messageId)
                     .pipe(
                         map(messageObject => {
-                            return messageObject.message
+                            return ({ 
+                                ...messageObject.message,
+                                messageId: messageObject.message._id
+                            })
                         })
                     )
                     .subscribe(message => {
-                        console.log("unlike getCawID", message)
                         this.message = message;
                     })
             }, e => {

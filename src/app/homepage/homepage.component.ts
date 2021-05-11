@@ -14,7 +14,7 @@ export class HomePage implements OnInit {
     }
 
     ngOnInit(){
-        console.log(localStorage.getItem('user_id'));
+        console.log(this.auth.getUserId);
     }
 
 }

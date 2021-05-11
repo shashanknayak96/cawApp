@@ -19,7 +19,7 @@ export class CawsComponent implements OnInit {
     }
 
     ngOnInit() {
-        const userId = localStorage.getItem('user_id');
+        const userId = this.auth.getUserId;
         this.getCaws(userId);
         this.cawService.newCawAdded.subscribe(r => {
             this.getCaws(userId);

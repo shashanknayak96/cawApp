@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../auth/auth.service";
 
 @Component({
     selector: 'ProfilecardComponent',
@@ -6,5 +7,13 @@ import { Component } from "@angular/core";
     styleUrls: ['./profilecard.component.scss']
 })
 
-export class ProfileCardComponent{
+export class ProfileCardComponent implements OnInit{
+
+    userId: string;
+    constructor(private auth: AuthService){}
+
+    ngOnInit(){
+        this.userId = this.auth.getUserId;
+    }
+
 }

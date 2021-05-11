@@ -9,7 +9,7 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'signup', component: SignupComponent},
     {path: 'home', component: HomePage},
-    {path: 'user', component: ProfileComponent},
+    {path: 'user/:userId', component: ProfileComponent},
 
 ];
 

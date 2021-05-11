@@ -80,3 +80,24 @@ exports.loginUser = (req, res, next) => {
             })
         })
 }
+
+exports.getUserById = (req, res, next) => {
+
+    const {userId} = req.query;
+    User.findById(userId)
+    .then(user => {
+        if(user){
+                console.log("HERE: ", user); 
+                res.status(201).json({
+                    message: 'get_user_by_id',
+                    user: user
+                })
+            }
+        })
+        .catch(error => {
+            res.status(501).json({
+                message: 'user_not_found',
+                error
+            })
+        })
+}

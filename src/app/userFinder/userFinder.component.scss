@@ -1,0 +1,27 @@
+.userFinderContainer {
+    position: sticky;
+    top: 200px;
+    margin-top: 10px;
+    // width: 400px;
+
+    .box {
+        position: relative;
+        height: 500px;
+
+        .cawActions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .rightActions{
+                display: flex;
+                align-items: center;
+                margin-top: 10px;
+
+                .charCount{
+                    margin-right: 10px;
+                }
+
+            }
+        }
+    }
+}

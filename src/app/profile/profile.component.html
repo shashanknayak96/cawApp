@@ -11,21 +11,21 @@
             <img src="./assets/cawLogo.png">
         </div>
         <div class="userInformation">
-            <h3 class="title is-3">Shashank Nayak</h3>
-            <h6 class="subtitle is-6">@shah</h6>
+            <h3 class="title is-3">{{user.firstName}} {{user.lastName}}</h3>
+            <h6 class="subtitle is-6">@{{user.userTag}}</h6>
         </div>
         <div class="stats">
             <div class="statBox">
-                <h3 class="title is-3">100</h3>
+                <h3 class="title is-3">{{user.followers.length}}</h3>
                 <h6 class="subtitle is-6">Followers</h6>
             </div>
             <div class="statBox">
-                <h3 class="title is-3">124</h3>
+                <h3 class="title is-3">{{user.following.length}}</h3>
                 <h6 class="subtitle is-6">Following</h6>
             </div>
             <div class="statBox">
-                <h3 class="title is-3">124</h3>
-                <h6 class="subtitle is-6">Following</h6>
+                <h3 class="title is-3">{{user.messages.length}}</h3>
+                <h6 class="subtitle is-6">Total Caws</h6>
             </div>
         </div>
 
