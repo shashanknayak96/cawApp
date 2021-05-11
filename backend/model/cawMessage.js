@@ -6,7 +6,7 @@ const cawMessageSchema = new Schema(
     {
         cawMessage: { type: String, required: true },
         timestamp: { type: Date, required: true },
-        totalLikes: { type: Number, required: true },
+        totalLikes: { type: Number, required: true, min: 0 },
         userId: { type: ObjectId, ref: 'user'},
     },
     {

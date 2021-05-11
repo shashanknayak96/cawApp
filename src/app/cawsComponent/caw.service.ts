@@ -39,4 +39,22 @@ export class CawService{
             userId
         });
     }
+
+    likeCaw(userId: string, messageId: string){
+        return this.http.post('http://localhost:3000/caw/likeCaw', {
+            userId: userId, 
+            messageId: messageId
+        });
+    }
+
+    unlikeCaw(userId: string, messageId: string){
+        return this.http.post('http://localhost:3000/caw/unlikeCaw', {
+            userId: userId, 
+            messageId: messageId
+        });
+    }
+
+    getCawById(messageId){
+        return this.http.get<any>('http://localhost:3000/caw/getCawById' + '?messageId=' + messageId);
+    }
 }

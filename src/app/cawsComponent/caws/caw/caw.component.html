@@ -17,7 +17,7 @@
             <button (click)="likeMessage()">
                 <span class="icon">
                     <fa-icon [icon]="this.messageLiked ? solidHeart : emptyHeart"></fa-icon>
-                </span>
+                </span>{{message.totalLikes}}
             </button>
         </div>
     </div>

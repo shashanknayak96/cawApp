@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/auth/auth.service";
 import { CawService } from "../caw.service";
+import { pipe } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 @Component({
     selector: 'CawsComponent',
@@ -16,21 +19,29 @@ export class CawsComponent implements OnInit {
     }
 
     ngOnInit() {
-        const userId = localStorage.getItem('user_id'); 
+        const userId = localStorage.getItem('user_id');
         this.getCaws(userId);
         this.cawService.newCawAdded.subscribe(r => {
-            this.getCaws(userId);            
+            this.getCaws(userId);
         });
     }
 
-    getCaws(userId){
+    getCaws(userId) {
         this.cawService.getCaws(userId)
-            .subscribe(response => {
-                console.log(response);
-                this.cawService.newCawAdded.subscribe(r => {
-                    
-                });
-                this.messages = response.message;
+            .pipe(
+                map(response => {
+                    return (
+                        response.message.map(message => {
+                            return ({
+                                ...message,
+                                messageId: message._id
+                            })
+                        })
+                    )
+                })
+            )
+            .subscribe(messages => {
+                this.messages = messages;
             })
     }
 
