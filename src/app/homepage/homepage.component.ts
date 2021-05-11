@@ -1,11 +1,20 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../auth/auth.service";
 
 @Component({
-    selector: 'Homepage', 
+    selector: 'Homepage',
     templateUrl: './homepage.component.html',
     styleUrls: ['./homepage.component.scss']
 })
 
-export class HomePage{
+export class HomePage implements OnInit {
+
+    constructor(private auth: AuthService) {
+
+    }
+
+    ngOnInit(){
+        console.log(localStorage.getItem('user_id'));
+    }
 
 }

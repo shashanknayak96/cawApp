@@ -12,6 +12,7 @@ $mainColor: #333333;
     top: 0;
     left: 0;
     color: $mainColor;
+    overflow-x: auto;
 
     .box {
         position: relative;

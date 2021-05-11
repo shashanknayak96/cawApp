@@ -1,11 +1,24 @@
 <div class="mainContainer">
-    <form class="box">
+    <article *ngIf="displaySignupMessage"  
+        class="message is-success">
+        <div class="message-header">
+            <p>Success</p>
+            <button class="delete" (click)="closeSignupDialog()" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+            Signup successful! Please login to continue.
+        </div>
+    </article>
+
+    <form [formGroup]="loginForm" class="box">
         <img class="imgLogo" src="./assets/cawLogo.png" alt="cawLogo">
         <br>
+
+
         <div class="field">
             <label class="label">Email</label>
             <div class="control">
-                <input class="input" type="email" placeholder="e.g. alex@example.com">
+                <input class="input" type="email" placeholder="e.g. alex@example.com" formControlName="email">
             </div>
         </div>
 
@@ -13,13 +26,13 @@
         <div class="field">
             <label class="label">Password</label>
             <div class="control">
-                <input class="input password" type="password" placeholder="********">
+                <input class="input password" type="password" placeholder="********" formControlName="password">
             </div>
         </div>
-        <button class="button is-warning is-fullwidth">Sign In</button>
+        <button type="submit" (click)="loginUser()" class="button is-warning is-fullwidth">Sign In</button>
         <br>
         <div class="block">
             <span>Dont have an account? <strong> <a routerLink="/signup">Sign Up</a></strong> here.</span>
         </div>
-    </form>   
+    </form>
 </div>
