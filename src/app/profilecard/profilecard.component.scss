@@ -5,15 +5,19 @@
     align-items: center;
     justify-content: center;
     margin-top: 10px;
-
+    
     .box{
         text-align: center;
         width: 100%;
-
+        
         .userImage{
             width: 150px;
             height: 150px;
     
+        }
+
+        a{
+            color: var(--grey);
         }
     }
 

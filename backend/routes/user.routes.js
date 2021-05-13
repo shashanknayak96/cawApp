@@ -10,6 +10,7 @@ userRoutes.get('/getUserById', userController.getUserById);
 userRoutes.get('/getUserByNameOrTag', userController.getUserByNameOrTag);
 userRoutes.post('/followUser', userController.followUser);
 userRoutes.post('/unfollowUser', userController.unfollowUser);
+userRoutes.post('/checkUserTag', userController.checkUserTag);
 
 
 

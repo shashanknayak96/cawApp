@@ -68,6 +68,12 @@ export class AuthService {
             })
     }
 
+    checkUserTag(userTag){
+        return this.http.post<any>(this.backend_url + '/user/checkUserTag', {
+            userTag: userTag
+        });
+    }
+
     getUserById(userId: string){
         return this.http.get<any>(this.backend_url + '/user/getUserById' + '?userId=' + userId);
     }

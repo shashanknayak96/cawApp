@@ -36,7 +36,6 @@ export class CawComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.currentUser);
         this.userId = this.auth.getUserId;
 
         const userLikeMessages: string[] = this.currentUser.likesMessages;

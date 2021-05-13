@@ -14,6 +14,7 @@ export class SignupComponent implements OnInit {
     invalidPassword: boolean = true;
     invalidConfirmPassword: boolean = false;
     signupForm: FormGroup;
+    tagAvailable;
 
     constructor(private auth: AuthService){}
 
@@ -68,5 +69,21 @@ export class SignupComponent implements OnInit {
         }
 
         this.auth.signup(user);
+    }
+
+    checkUserTag(){
+        const userTag = this.signupForm.value['userTag'];
+        if(userTag === ''){
+            return;
+        }
+
+        this.auth.checkUserTag(userTag)
+            .subscribe(r => {
+                if(r.message === "tag_already_in_use"){
+                    this.tagAvailable = false;
+                }else if (r.message === "tag_available"){
+                    this.tagAvailable = true;
+                }
+            })
     }
 }

@@ -5,9 +5,10 @@
         <div class="field">
             <label class="label">User Tag</label>
             <div class="control">
-                <input class="input" type="text" placeholder="" formControlName="userTag" required #firstName> 
+                <input class="input" type="text" placeholder="" (blur)="checkUserTag()" formControlName="userTag" required #firstName> 
             </div>
-            <p class="help is-danger" *ngIf="signupForm.get('userTag').touched && signupForm.get('userTag').invalid">This is a required field</p>
+            <p class="help is-danger" *ngIf="!tagAvailable && signupForm.get('userTag').touched">The entered user tag is not available</p>
+            <p class="help is-success" *ngIf="tagAvailable">The entered user tag is available</p>
         </div>
         <div class="field">
             <label class="label">First Name</label>

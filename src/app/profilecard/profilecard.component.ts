@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { UserModel } from "src/models/user.model";
 import { AuthService } from "../auth/auth.service";
 
@@ -12,7 +13,7 @@ export class ProfileCardComponent implements OnInit{
 
     userId: string;
     userObject: UserModel;
-    constructor(private auth: AuthService){}
+    constructor(private auth: AuthService, private router: Router){}
 
     ngOnInit(){
         this.userId = this.auth.getUserId;
@@ -25,6 +26,7 @@ export class ProfileCardComponent implements OnInit{
 
     logout(){
         this.auth.logout();
+        this.router.navigate(['/login']);
     }
 
 }

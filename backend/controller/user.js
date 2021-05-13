@@ -87,10 +87,32 @@ exports.getUserById = (req, res, next) => {
     User.findById(userId)
         .then(user => {
             if (user) {
-                console.log("HERE: ", user);
                 res.status(201).json({
                     message: 'get_user_by_id',
                     user: user
+                })
+            }
+        })
+        .catch(error => {
+            res.status(501).json({
+                message: 'user_not_found',
+                error
+            })
+        })
+}
+
+exports.checkUserTag = (req, res, next) => {
+    const { userTag } = req.body;
+    console.log(userTag);
+    User.findOne({userTag: userTag})
+        .then(user => {
+            if (user) {
+                res.status(201).json({
+                    message: 'tag_already_in_use'
+                })
+            }else {
+                res.status(201).json({
+                    message: 'tag_available'
                 })
             }
         })
