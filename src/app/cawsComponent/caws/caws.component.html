@@ -1,16 +1,9 @@
 <div class="cawsContainer">
     <div class="box">
-        <div class="noMessageDiv">
-            <div>
-
-            </div>
-            <div>
-                
-            </div>
+        <div class="noMessageDiv" *ngIf="messages.length === 0">
+            Looks like you haven't cawed yet! Caw or follow other people to view their caws.
         </div>
-        <CawComponent 
-            *ngFor="let i of messages"
-            [message]="i">
+        <CawComponent *ngFor="let i of messages" [message]="i" [currentUser]="currentUser">
         </CawComponent>
     </div>
 </div>

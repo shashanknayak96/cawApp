@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { UserModel } from "src/models/user.model";
 import { AuthService } from "../auth/auth.service";
 
 @Component({
@@ -10,10 +11,20 @@ import { AuthService } from "../auth/auth.service";
 export class ProfileCardComponent implements OnInit{
 
     userId: string;
+    userObject: UserModel;
     constructor(private auth: AuthService){}
 
     ngOnInit(){
         this.userId = this.auth.getUserId;
+        this.auth.getUserById(this.userId)
+            .subscribe(r => {
+                this.userObject = r.user;
+            })
+    }
+
+
+    logout(){
+        this.auth.logout();
     }
 
 }

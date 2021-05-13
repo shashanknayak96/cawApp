@@ -49,7 +49,44 @@ exports.getCaws = (req, res, next) => {
                 error: error
             })
         })
+}
 
+exports.getCawsForFeed = (req, res, next) => {
+    const { userId } = req.query;
+    let feedMessages = [];
+    User.findById(userId)
+        .sort({ 'timestamp': "desc" })
+        // .populate('messages')
+        .populate({
+            path: 'messages',
+            populate: 'userId'
+        })
+        .then(userObject => {
+            feedMessages.push(...userObject.messages);
+            return CawMessage.find({
+                'userId': {
+                    $in: userObject.following
+                }
+            })
+            .sort({ 'timestamp': "desc" })
+            .populate('userId')
+        })
+        .then(userFollowingMessages => {
+            console.log(userFollowingMessages);
+
+            feedMessages.push(...userFollowingMessages);
+
+            feedMessages.sort((a, b) =>(a.timestamp > b.timestamp) ? -1 : ((b.timestamp > a.timestamp) ? 1 : 0))
+            res.status(201).json({
+                feedMessages
+            })
+        })
+        .catch(error => {
+            res.status(500).json({
+                message: "unexpected_error",
+                error: error
+            })
+        })
 }
 
 exports.getCawById = (req, res, next) => {

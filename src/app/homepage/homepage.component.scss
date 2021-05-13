@@ -10,12 +10,21 @@ $mainColor: #333333;
 
     .columns{
 
-        .customColumn{
-            width: 100%;
-        }
+        // .customColumn{
+        //     width: 100%;
+        // }
 
         .column{
             margin: 10px;
         }    
+    }
+}
+
+
+@media only screen and (max-width: 770px){
+    .homepageContainer{
+        .userFinderContainer{
+            display: none;
+        }
     }
 }

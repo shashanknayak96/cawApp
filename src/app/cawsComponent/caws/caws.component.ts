@@ -3,6 +3,7 @@ import { AuthService } from "src/app/auth/auth.service";
 import { CawService } from "../caw.service";
 import { pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UserModel } from "src/models/user.model";
 
 
 @Component({
@@ -13,6 +14,7 @@ import { map } from 'rxjs/operators';
 
 export class CawsComponent implements OnInit {
     messages = [];
+    currentUser: UserModel;
 
     constructor(private auth: AuthService, private cawService: CawService) {
 
@@ -24,6 +26,9 @@ export class CawsComponent implements OnInit {
         this.cawService.newCawAdded.subscribe(r => {
             this.getCaws(userId);
         });
+        this.auth.getUserById(userId).subscribe(r=> {
+            this.currentUser = r.user;
+        })
     }
 
     getCaws(userId) {
@@ -31,7 +36,7 @@ export class CawsComponent implements OnInit {
             .pipe(
                 map(response => {
                     return (
-                        response.message.map(message => {
+                        response.feedMessages.map(message => {
                             return ({
                                 ...message,
                                 messageId: message._id

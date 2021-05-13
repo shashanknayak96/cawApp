@@ -1,15 +1,15 @@
 <div class="profileContainer">
     <div class="box">
         <img class="userImage" src="./assets/cawLogo.png">
-        <p class="title is-4">Shashank Nayak</p>
-        <h6 class="subtitle is-6">@shash</h6>
+        <p *ngIf="userObject" class="title is-4">{{userObject.firstName}} {{userObject.lastName}}</p>
+        <h6 *ngIf="userObject" class="subtitle is-6">@{{userObject.userTag}}</h6>
         <p class="subtitle is-5">Idk what I am doing.</p>
         <br>
         <a [routerLink]="'/user/' + this.userId">My Profile</a>
         <br>
         <a>Messages</a>
         <br>
-        <a>Logout</a>
+        <a (click)="logout()">Logout</a>
 
     </div>
 </div>

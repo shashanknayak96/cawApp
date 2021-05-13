@@ -2,13 +2,13 @@
   <div class="columns">
     <div class="column is-one-quarter">
       <CawMaker></CawMaker>
-      <UserFinder></UserFinder>
+      <UserFinder [currentUser]='currentUser' class="userFinderContainer"></UserFinder>
     </div>
     <div class="column customColumn">
       <CawsComponent></CawsComponent>
     </div>  
     <div class="column is-one-quarter">
-      <ProfilecardComponent></ProfilecardComponent>
+      <ProfilecardComponent class="profileCardContainer"></ProfilecardComponent>
     </div>
   </div>
 </div>

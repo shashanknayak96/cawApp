@@ -34,11 +34,11 @@
         }
     }
 
-
-    .container123 {
+    .emojiContainer {
         display: grid;
         grid-template-columns: 100% 0%;
         width: 36%;
+        z-index: 99;
         
         button {
            background: transparent;

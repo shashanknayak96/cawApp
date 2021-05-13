@@ -1,5 +1,29 @@
 <div class="userItemContainer">
     <div class="box">
-        {{user.name}}
+        <div class="elements">
+            <div class="imageElement">
+                <img src="./assets/cawLogo.png" alt="">
+            </div>
+            <div class="nameElement">
+                <div class="name">
+                    {{user.firstName}} {{user.lastName}}
+                </div>
+                <div class="tag">
+                   @{{user.userTag}}
+                </div>
+            </div>
+            <div class="actionButtons">
+                <div class="followButton">
+                    <button class="button" type="button" (click)="followUnfollowUser()">
+                        <fa-icon [icon]="isFollowing ? unfollowIcon : followIcon"></fa-icon>
+                    </button>
+                </div>
+                <div class="profileButton">
+                    <button class="button" type="button" [routerLink]="'/user/' + user.userId">
+                        <fa-icon [icon]="faCrow"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

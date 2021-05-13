@@ -35,9 +35,7 @@ export class CawService{
     }
 
     getCaws(userId: string){
-        return this.http.post<{message: Array<any>}>('http://localhost:3000/caw/get', {
-            userId
-        });
+        return this.http.get<any>('http://localhost:3000/caw/getCawsForFeed' + '?userId=' + userId );
     }
 
     likeCaw(userId: string, messageId: string){
@@ -57,4 +55,6 @@ export class CawService{
     getCawById(messageId){
         return this.http.get<any>('http://localhost:3000/caw/getCawById' + '?messageId=' + messageId);
     }
+
+    
 }

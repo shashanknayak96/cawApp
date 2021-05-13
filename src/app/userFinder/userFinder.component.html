@@ -1,20 +1,28 @@
 <div class="userFinderContainer">
-    <div class="box">
-        <form>
-            <input class="input" 
+    <div class="box" [formGroup]="userFinderForm">
+            <input 
+                (keyup.space)="findUser($event)"
+                class="input" 
                 placeholder="Find other cawer's here..."
+                formControlName="userQuery"
                 />
             <div class="cawActions">
                 <span></span>
                 <div class="rightActions">
-                    <button type="button" 
+                    <a 
+                        (click)="findUser($event)"
+                        type="button" 
                         class="button is-rounded is-warning" 
-                        >FIND</button>
+                        >FIND</a>
                 </div>
             </div>
-        </form>
         <div>
-            <UserFinderItem *ngFor="let a of user" [user]="a"></UserFinderItem>
+            <UserFinderItem 
+                *ngFor="let user of users" 
+                [currentUser]="currentUser" 
+                [user]="user"
+                (buttonClicked)="clearSearchbar()"
+                ></UserFinderItem>
         </div>
     </div>
 </div>

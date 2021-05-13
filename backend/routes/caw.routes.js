@@ -13,6 +13,7 @@ cawRoutes.post('/likeCaw', cawMessageController.likeCaw);
 cawRoutes.post('/unlikeCaw', cawMessageController.unlikeCaw);
 //Get Caw by ID
 cawRoutes.get('/getCawById', cawMessageController.getCawById);
+cawRoutes.get('/getCawsForFeed', cawMessageController.getCawsForFeed);
 
 
 

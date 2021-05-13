@@ -1,6 +1,7 @@
 const User = require('../model/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const cawMessage = require('../model/cawMessage');
 
 
 exports.sigupUser = (req, res, next) => {
@@ -82,12 +83,11 @@ exports.loginUser = (req, res, next) => {
 }
 
 exports.getUserById = (req, res, next) => {
-
-    const {userId} = req.query;
+    const { userId } = req.query;
     User.findById(userId)
-    .then(user => {
-        if(user){
-                console.log("HERE: ", user); 
+        .then(user => {
+            if (user) {
+                console.log("HERE: ", user);
                 res.status(201).json({
                     message: 'get_user_by_id',
                     user: user
@@ -97,6 +97,64 @@ exports.getUserById = (req, res, next) => {
         .catch(error => {
             res.status(501).json({
                 message: 'user_not_found',
+                error
+            })
+        })
+}
+
+exports.getUserByNameOrTag = (req, res, next) => {
+    const { queryString } = req.query;
+
+    User.find({ $or: [{ firstName: new RegExp('^' + queryString + '.*', "i") }, { userTag: new RegExp('^' + queryString + '.*', "i") }] })
+        .then(users => {
+            if (users) {
+                res.status(201).json({
+                    message: 'user_found',
+                    users: users
+                })
+            }
+        })
+}
+
+exports.followUser = (req, res, next) => {
+    const { mainUser, followUser } = req.body;
+
+    User.findByIdAndUpdate(mainUser, { $push: { following: followUser } })
+        .then(r => {
+            if (r) {
+                return User.findByIdAndUpdate(followUser, { $push: { followers: mainUser } })
+            }
+        })
+        .then(r => {
+            res.status(201).json({
+                message: 'followed_user'
+            })
+        })
+        .catch(error => {
+            res.status(501).json({
+                message: 'follow_error',
+                error
+            })
+        })
+}
+
+exports.unfollowUser = (req, res, next) => {
+    const { mainUser, unfollowUser } = req.body;
+
+    User.findByIdAndUpdate(mainUser, { $pull: { following: unfollowUser } })
+        .then(r => {
+            if (r) {
+                return User.findByIdAndUpdate(unfollowUser, { $pull: { followers: mainUser } })
+            }
+        })
+        .then(r => {
+            res.status(201).json({
+                message: 'unfollowed_user'
+            })
+        })
+        .catch(error => {
+            res.status(501).json({
+                message: 'unfollow_error',
                 error
             })
         })

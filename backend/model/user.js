@@ -9,7 +9,7 @@ const userSchema = new Schema(
         lastName: { type: String, required: true },
         email: { type: String, required: true },
         password: { type: String, required: true },
-        messages: [{ type: ObjectId }],
+        messages: [{ type: ObjectId, ref: 'cawMessage' }],
         followers: [{ type: ObjectId }],
         following: [{ type: ObjectId}],
         likesMessages: [{ type: ObjectId}],

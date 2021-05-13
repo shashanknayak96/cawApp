@@ -24,68 +24,74 @@ export class CawComponent implements OnInit {
         totalLikes: number,
         userId: UserModel
     };
+
+    @Input() currentUser: UserModel;
     solidHeart = solidHeart;
     emptyHeart = emptyHeart;
     messageLiked: boolean = false;
-    userId:string; 
+    userId: string;
 
-
-    constructor(private auth: AuthService,private cawService: CawService) {
+    constructor(private auth: AuthService, private cawService: CawService) {
 
     }
 
     ngOnInit() {
+        console.log(this.currentUser);
         this.userId = this.auth.getUserId;
-        const userLikeMessages: string[] = this.message.userId.likesMessages;
-        if(userLikeMessages.includes(this.message.messageId)){
-            this.messageLiked = true;
-        }else{
+
+        const userLikeMessages: string[] = this.currentUser.likesMessages;
+        if (userLikeMessages) {
+            if (userLikeMessages.includes(this.message.messageId)) {
+                this.messageLiked = true;
+            }
+        }
+        else {
             this.messageLiked = false;
         }
     }
 
     likeMessage() {
         this.messageLiked = !this.messageLiked;
-        
-        if(this.messageLiked){
-            this.message.totalLikes += 1;            
+
+        if (this.messageLiked) {
+            this.message.totalLikes += 1;
             this.cawService.likeCaw(this.userId, this.message.messageId)
                 .subscribe(r => {
                     this.cawService.getCawById(this.message.messageId)
-                    .pipe(
-                        map(messageObject => {
-                            return ({ 
-                                ...messageObject.message,
-                                messageId: messageObject.message._id
+                        .pipe(
+                            map(messageObject => {
+                                return ({
+                                    ...messageObject.message,
+                                    messageId: messageObject.message._id
+                                })
                             })
+                        )
+                        .subscribe(message => {
+                            this.message = message;
                         })
-                    )
-                    .subscribe(message => {
-                        this.message = message;
-                    })
                 }, e => {
-                    this.message.totalLikes -= 1;  
+                    this.message.totalLikes -= 1;
                 })
-        }else {
-            this.message.totalLikes -= 1;   
+        } else {
+            this.message.totalLikes -= 1;
             this.cawService.unlikeCaw(this.userId, this.message.messageId)
-            .subscribe(r => {
-                this.cawService.getCawById(this.message.messageId)
-                    .pipe(
-                        map(messageObject => {
-                            return ({ 
-                                ...messageObject.message,
-                                messageId: messageObject.message._id
+                .subscribe(r => {
+                    this.cawService.getCawById(this.message.messageId)
+                        .pipe(
+                            map(messageObject => {
+                                return ({
+                                    ...messageObject.message,
+                                    messageId: messageObject.message._id
+                                })
                             })
+                        )
+                        .subscribe(message => {
+                            this.message = message;
                         })
-                    )
-                    .subscribe(message => {
-                        this.message = message;
-                    })
-            }, e => {
-                this.message.totalLikes += 1;  
-            })
-            
+                }, e => {
+                    this.message.totalLikes += 1;
+                })
+
 
         }
 
