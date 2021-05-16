@@ -10,6 +10,7 @@ import { AuthService } from "../auth/auth.service";
 export class CawService{
     
     newCawAdded = new EventEmitter();
+    backend_url_server = 'https://caw-app.herokuapp.com';
 
     constructor(private http: HttpClient, private auth: AuthService){
 
@@ -23,7 +24,7 @@ export class CawService{
     addCaw(cawMessage: string){
         const timestamp = new Date();
         const userId = localStorage.getItem('user_id');
-        this.http.post('http://localhost:3000/caw/add', {
+        this.http.post(this.backend_url_server + '/caw/add', {
             cawMessage,
             userId,
             timestamp,
@@ -35,25 +36,25 @@ export class CawService{
     }
 
     getCaws(userId: string){
-        return this.http.get<any>('http://localhost:3000/caw/getCawsForFeed' + '?userId=' + userId );
+        return this.http.get<any>(this.backend_url_server + '/caw/getCawsForFeed' + '?userId=' + userId );
     }
 
     likeCaw(userId: string, messageId: string){
-        return this.http.post('http://localhost:3000/caw/likeCaw', {
+        return this.http.post(this.backend_url_server + '/caw/likeCaw', {
             userId: userId, 
             messageId: messageId
         });
     }
 
     unlikeCaw(userId: string, messageId: string){
-        return this.http.post('http://localhost:3000/caw/unlikeCaw', {
+        return this.http.post(this.backend_url_server + '/caw/unlikeCaw', {
             userId: userId, 
             messageId: messageId
         });
     }
 
     getCawById(messageId){
-        return this.http.get<any>('http://localhost:3000/caw/getCawById' + '?messageId=' + messageId);
+        return this.http.get<any>(this.backend_url_server + '/caw/getCawById' + '?messageId=' + messageId);
     }
 
     

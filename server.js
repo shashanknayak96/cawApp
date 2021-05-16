@@ -34,7 +34,7 @@ const forceSSL = function() {
 // middlewareapp.use(forceSSL());
 // app.use(forceSSL());
 app.use(express.static(__dirname + '/dist/cawApp'));
-app.use('/user', userRoutes);
+app.use('/restuser', userRoutes);
 app.use('/caw', cawRoutes);
 
 
@@ -56,6 +56,3 @@ mongoose.connect("mongodb+srv://shashank:CawCaw@cawapp.tld43.mongodb.net/cawAppD
         }
     )
     .catch(err => console.log(err));
-
-
-// app.listen(process.env.PORT || 8080);

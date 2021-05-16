@@ -7,14 +7,17 @@ import { Injectable } from "@angular/core";
 
 export class UserActions {
 
+    backend_url_server = 'https://caw-app.herokuapp.com';
+
+
     constructor(private http: HttpClient){}
 
     getUserByNameOrTag(queryString: string){
-        return this.http.get<any>('http://localhost:3000/user/getUserByNameOrTag' + '?queryString=' + queryString);
+        return this.http.get<any>(this.backend_url_server+ '/restuser/getUserByNameOrTag' + '?queryString=' + queryString);
     }
 
     followUser(mainUser: string, followUser:string){
-        this.http.post('http://localhost:3000/user/followUser', {
+        this.http.post(this.backend_url_server + '/restuser/followUser', {
             mainUser, followUser
         })
         .subscribe(r => {
@@ -23,7 +26,7 @@ export class UserActions {
     }
 
     unfollowUser(mainUser: string, unfollowUser:string){
-        this.http.post('http://localhost:3000/user/unfollowUser', {
+        this.http.post(this.backend_url_server  + '/restuser/unfollowUser', {
             mainUser, unfollowUser
         })
         .subscribe(r => {

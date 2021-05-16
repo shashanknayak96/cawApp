@@ -11,6 +11,7 @@ export class AuthService {
 
     api_key = 'AIzaSyBqnwWTBmQ1CJTqdqFPU0Ww92cGnwmzWws';
     backend_url = 'http://localhost:3000'
+    backend_url_server = 'https://caw-app.herokuapp.com';
     signedUp: boolean = false;
     userToken: string;
     userId: string;
@@ -34,7 +35,7 @@ export class AuthService {
     }
 
     signup(user: UserModel) {
-        this.http.post(this.backend_url + '/user/signup',
+        this.http.post(this.backend_url_server + '/restuser/signup',
             {
                 userTag: user.userTag,
                 firstName: user.firstName,
@@ -53,7 +54,7 @@ export class AuthService {
     }
 
     login(email: string, password: string) {
-        this.http.post<{message: string, token: string, id: string}>('http://localhost:3000/user/login',
+        this.http.post<{message: string, token: string, id: string}>(this.backend_url_server + '/restuser/login',
             {
                 email: email,
                 password: password,
@@ -69,13 +70,13 @@ export class AuthService {
     }
 
     checkUserTag(userTag){
-        return this.http.post<any>(this.backend_url + '/user/checkUserTag', {
+        return this.http.post<any>(this.backend_url_server + '/restuser/checkUserTag', {
             userTag: userTag
         });
     }
 
     getUserById(userId: string){
-        return this.http.get<any>(this.backend_url + '/user/getUserById' + '?userId=' + userId);
+        return this.http.get<any>(this.backend_url_server + '/restuser/getUserById' + '?userId=' + userId);
     }
 
     logout(){
