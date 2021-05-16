@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from "src/models/user.model";
 import { Router } from "@angular/router";
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -10,8 +11,9 @@ import { Router } from "@angular/router";
 export class AuthService {
 
     api_key = 'AIzaSyBqnwWTBmQ1CJTqdqFPU0Ww92cGnwmzWws';
-    backend_url = 'http://localhost:3000'
-    backend_url_server = 'https://caw-app.herokuapp.com';
+    // backend_url = 'http://localhost:3000'
+    // backend_url_server = 'https://caw-app.herokuapp.com';
+    backend_url = environment.backend_url;
     signedUp: boolean = false;
     userToken: string;
     userId: string;
@@ -35,7 +37,7 @@ export class AuthService {
     }
 
     signup(user: UserModel) {
-        this.http.post(this.backend_url_server + '/restuser/signup',
+        this.http.post(this.backend_url + '/restuser/signup',
             {
                 userTag: user.userTag,
                 firstName: user.firstName,
@@ -54,7 +56,7 @@ export class AuthService {
     }
 
     login(email: string, password: string) {
-        this.http.post<{message: string, token: string, id: string}>(this.backend_url_server + '/restuser/login',
+        this.http.post<{message: string, token: string, id: string}>(this.backend_url + '/restuser/login',
             {
                 email: email,
                 password: password,
@@ -70,13 +72,13 @@ export class AuthService {
     }
 
     checkUserTag(userTag){
-        return this.http.post<any>(this.backend_url_server + '/restuser/checkUserTag', {
+        return this.http.post<any>(this.backend_url + '/restuser/checkUserTag', {
             userTag: userTag
         });
     }
 
     getUserById(userId: string){
-        return this.http.get<any>(this.backend_url_server + '/restuser/getUserById' + '?userId=' + userId);
+        return this.http.get<any>(this.backend_url + '/restuser/getUserById' + '?userId=' + userId);
     }
 
     logout(){
