@@ -33,13 +33,13 @@ app.use((req, res, next) => {
 // to use the forceSSL
 // middlewareapp.use(forceSSL());
 // app.use(forceSSL());
-app.use(express.static(__dirname + '/dist/caw-app'));
+app.use(express.static(__dirname + '/dist/cawApp'));
 // app.use('/user', userRoutes);
 // app.use('/caw', cawRoutes);
 
 
 app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname + '/dist/caw-app/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/cawApp/index.html'));
 });
 
 
