@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
-// const mongoose = require('mongoose');
-// const userRoutes = require('./backend/routes/user.routes')
-// const cawRoutes = require('./backend/routes/caw.routes')
+const mongoose = require('mongoose');
+const userRoutes = require('./backend/routes/user.routes')
+const cawRoutes = require('./backend/routes/caw.routes')
 
 
 const app = express();
@@ -19,23 +19,23 @@ app.use((req, res, next) => {
   next();
 });
 
-// const forceSSL = function() {
-//     return function (req, res, next) {
-//       if (req.headers['x-forwarded-proto'] !== 'https') {
-//         return res.redirect(
-//          ['https://', req.get('Host'), req.url].join('')
-//         );
-//       }
-//       next();
-//     }
-//   }
+const forceSSL = function() {
+    return function (req, res, next) {
+      if (req.headers['x-forwarded-proto'] !== 'https') {
+        return res.redirect(
+         ['https://', req.get('Host'), req.url].join('')
+        );
+      }
+      next();
+    }
+  }
 // Instruct the app
 // to use the forceSSL
 // middlewareapp.use(forceSSL());
 // app.use(forceSSL());
 app.use(express.static(__dirname + '/dist/cawApp'));
-// app.use('/user', userRoutes);
-// app.use('/caw', cawRoutes);
+app.use('/user', userRoutes);
+app.use('/caw', cawRoutes);
 
 
 app.get('/*', function (req, res) {
@@ -44,18 +44,18 @@ app.get('/*', function (req, res) {
 
 
 
-// mongoose.set('useFindAndModify', false);
-// mongoose.connect("mongodb+srv://shashank:CawCaw@cawapp.tld43.mongodb.net/cawAppDB?retryWrites=true&w=majority", {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// })
-//     .then(
-//         result => {
-//             console.log('Mongodb Connected!');
-//             app.listen(process.env.PORT || 8080);
-//         }
-//     )
-//     .catch(err => console.log(err));
+mongoose.set('useFindAndModify', false);
+mongoose.connect("mongodb+srv://shashank:CawCaw@cawapp.tld43.mongodb.net/cawAppDB?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .then(
+        result => {
+            console.log('Mongodb Connected!');
+            app.listen(process.env.PORT || 8080);
+        }
+    )
+    .catch(err => console.log(err));
 
 
-app.listen(process.env.PORT || 8080);
+// app.listen(process.env.PORT || 8080);
