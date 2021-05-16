@@ -30,16 +30,16 @@ const forceSSL = function() {
   }// Instruct the app
   // to use the forceSSL
   // middlewareapp.use(forceSSL());
-
   app.use(forceSSL());
+  app.use(express.static(__dirname + '/dist/cawApp'));
+  app.use('/user', userRoutes);
+  app.use('/caw', cawRoutes);
 
 
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/cawApp/index.html'));
   });
 
-app.use('/user', userRoutes);
-app.use('/caw', cawRoutes);
 
 
 mongoose.set('useFindAndModify', false);
