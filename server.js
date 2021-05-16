@@ -34,13 +34,13 @@ const forceSSL = function() {
   app.use(forceSSL());
 
 
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/dist/cawApp/index.html'));
+  });
 
 app.use('/user', userRoutes);
 app.use('/caw', cawRoutes);
 
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname + '/dist/index.html'));
-  });
 
 mongoose.set('useFindAndModify', false);
 mongoose.connect("mongodb+srv://shashank:CawCaw@cawapp.tld43.mongodb.net/cawAppDB?retryWrites=true&w=majority", {
