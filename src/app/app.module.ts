@@ -17,6 +17,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { UserFinder } from './userFinder/userFinder.component';
 import { UserFinderItem } from './userFinder/userFinderItem/userFinderItem.component';
+import { CawLoader } from 'src/components/loader/loader';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UserFinderItem } from './userFinder/userFinderItem/userFinderItem.compo
     CawComponent,
     ProfileComponent,
     UserFinder,
-    UserFinderItem
+    UserFinderItem,
+    CawLoader
   ],
   imports: [
     BrowserModule,

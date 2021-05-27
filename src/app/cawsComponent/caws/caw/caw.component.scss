@@ -6,14 +6,26 @@
         display: flex;
 
         .titleLogo {
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
         }
 
         .titleName{
             display: flex;
-            align-items: center;
-            margin-left: 10px;
+            flex-grow: 1;
+            margin-top: 10px;
+
+            .name{
+                margin-left: 10px;
+            }
+
+            .tag{
+                margin-left: 5px;
+            }
+
+            .time{
+                margin-left: 10px;
+            }
         }
     }
 
@@ -21,27 +33,37 @@
         margin-top: 20px;
     }
 
-    .cawActions{
-        position: relative;
-        margin-top: 10px;
-        top: 10px;
-        bottom: 0px;
+    .cawFooter{
 
-        button{
-            border: 1.5px solid var(--grey);
-            background-color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            padding-left: 10px;
-            padding-right: 10px;
-            scale: 1.2;
-        }
+        .cawActions{
+            position: relative;
+            margin-top: 10px;
+            top: 10px;
+            bottom: 0px;
+    
+            button{
+                border: 1.5px solid var(--grey);
+                background-color: #fff;
+                border-radius: 5px;
+                cursor: pointer;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                padding-left: 10px;
+                padding-right: 10px;
+                scale: 1.2;
+            }
+    
+            .icon {
+                // scale: 1.5;
+                // color: #ffdd57;
+            }
 
-        .icon {
-            // scale: 1.5;
-            // color: #ffdd57;
+            .cawTime{
+                position: relative;
+                bottom: 0;
+                right: 0;
+            }
+    
         }
 
     }

@@ -7,7 +7,7 @@ import { CawService } from "../../caw.service";
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from "src/app/auth/auth.service";
-
+import * as moment from "moment";
 
 @Component({
     selector: 'CawComponent',
@@ -16,6 +16,9 @@ import { AuthService } from "src/app/auth/auth.service";
 })
 
 export class CawComponent implements OnInit {
+
+    // Moment = Moment;
+    
 
     @Input() message: {
         messageId: string,
@@ -30,6 +33,7 @@ export class CawComponent implements OnInit {
     emptyHeart = emptyHeart;
     messageLiked: boolean = false;
     userId: string;
+    timestamp: string; 
 
     constructor(private auth: AuthService, private cawService: CawService) {
 
@@ -47,6 +51,9 @@ export class CawComponent implements OnInit {
         else {
             this.messageLiked = false;
         }
+
+        //Timestamp
+        this.timestamp = moment(this.message.timestamp).fromNow();
     }
 
     likeMessage() {

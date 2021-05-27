@@ -2,23 +2,33 @@
     <div class="box">
 
         <div class="titleLine">
-            <img class="titleLogo" src="./assets/cawLogo.png" alt="title">
+            <div>
+                <img class="titleLogo" src="./assets/cawLogo.png" alt="title">
+            </div>
             <div class="titleName">
-                <h5 class="title is-5">{{message.userId.firstName}} {{message.userId.lastName}}
-                    <h6 class="subtitle is-6">@{{message.userId.userTag}}</h6>
-                </h5>
+                <div class="name">
+                    <h5 class="title is-5">{{message.userId.firstName}} {{message.userId.lastName}}</h5>
+                </div>
+                <div class="tag">
+                    <h6>@{{message.userId.userTag}}</h6>
+                </div>
+                <div class="time">
+                    <span><i>~ {{timestamp}}</i></span>
+                </div>
             </div>
         </div>
         <div class="cawContent">
             <h6 class="subtitle is-5">{{message.cawMessage}}</h6>
         </div>
 
-        <div class="cawActions">
-            <button (click)="likeMessage()">
-                <span class="icon">
-                    <fa-icon [icon]="this.messageLiked ? solidHeart : emptyHeart"></fa-icon>
-                </span>{{message.totalLikes}}
-            </button>
+        <div class="cawFooter">
+            <div class="cawActions">
+                <button (click)="likeMessage()">
+                    <span class="icon">
+                        <fa-icon [icon]="this.messageLiked ? solidHeart : emptyHeart"></fa-icon>
+                    </span>{{message.totalLikes}}
+                </button>
+            </div>
         </div>
     </div>
 </div>
